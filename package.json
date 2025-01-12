@@ -1,0 +1,40 @@
+{
+    "name": "irtesaam",
+    "version": "1.0.0",
+    "description": "A personal contact card for Irtesaam Atfi",
+    "main": "cli.js",
+    "type": "module",
+    "bin": {
+        "irtesaam": "./cli.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Irtesaam/my_npx_card.git"
+    },
+    "scripts": {
+        "test": "node clis.js"
+    },
+    "keywords": [
+        "card",
+        "npm",
+        "npm card",
+        "npx",
+        "npx card",
+        "contact card"
+    ],
+    "author": "Irtesaam Atfi (https://irtesnaps.in/)",
+    "license": "ISC",
+    "dependencies": {
+        "boxen": "^8.0.1",
+        "chalk": "^5.4.1",
+        "clear": "^0.1.0",
+        "cli-spinner": "^0.2.10",
+        "fs": "^0.0.1-security",
+        "inquirer": "^12.3.1",
+        "open": "^10.1.0",
+        "ora": "^8.1.1",
+        "path": "^0.12.7",
+        "prettyjson": "^1.2.5",
+        "request": "^2.88.2"
+    }
+}
