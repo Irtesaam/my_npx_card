@@ -2,11 +2,62 @@
 
 import chalk from 'chalk';
 import boxen from 'boxen';
+import inquirer from "inquirer";
 import clear from 'clear';
-
+import open from 'open';
+import fs from 'fs';
+import request from 'request';
+import path from 'path';
+import ora from 'ora';
+import cliSpinners from 'cli-spinners';
+import os from 'os';
 clear();
 
 import { data } from './lib/data.js';
+
+const prompt = inquirer.createPromptModule();
+
+const questions = [
+    {
+        type: "list",
+        name: "action",
+        message: "What you want to do?",
+        choices: [
+            {
+                name: `Send me an ${chalk.magentaBright.bold("email")}?`,
+                value: () => {
+                    open("mailto:atfimdirtesaam@gmail.com");
+                    console.log("\nCheck your browser, and type the mail.\n");
+                }
+            },
+            {
+                name: `Download my ${chalk.blue.bold("Resume")}?`,
+                value: () => {
+                    // cliSpinners.dots;
+                    const loader = ora({
+                        text: 'Downloading Resume',
+                        spinner: cliSpinners.material,
+                    }).start();
+                    const homeDir = os.homedir(); // Get the home directory
+                    let pipe = request('https://drive.google.com/uc?export=download&id=1OQRUzZUODI64XXyxfIJClgwRq0-ndYuG').pipe(fs.createWriteStream(`${homeDir}/irtesaam_atfi_resume.pdf`));
+                    pipe.on("finish", function () {
+                        let downloadPath = path.join(homeDir, 'irtesaam_atfi_resume.pdf');
+                        console.log(`\nResume Downloaded at ${downloadPath} \n`);
+                        open(downloadPath)
+                        loader.stop();
+                    });
+                }
+            },
+
+            {
+                name: `Just ${chalk.red.bold("quit.")}`,
+                value: () => {
+                    console.log("Thanks for hanging out, goodbye!\n");
+                }
+            }
+        ]
+    }
+];
 
 const me = boxen(
     [
@@ -42,3 +93,5 @@ const me = boxen(
 
 
 console.log(me);
+
+prompt(questions).then(answer => answer.action());
