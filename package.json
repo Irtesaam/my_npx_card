@@ -1,6 +1,6 @@
 {
     "name": "irtesaam",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "A personal contact card for Irtesaam Atfi",
     "main": "cli.js",
     "type": "module",
